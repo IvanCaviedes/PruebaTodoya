@@ -1,14 +1,20 @@
 var fs = require('fs');
 const path = require("path")
+const FileModel = require("../models/fileModel")
 
 function Upload(req, res) {
-    const {carpeta} = req.body
+    const { carpeta } = req.body
     const body = req.file
-if (!carpeta) {
-    console.log("no existe")
-}else{
-    console.log("si existe")
-}
+    if (!carpeta) {
+        console.log("no existe")
+    } else {
+
+        // originalname
+        // type
+        // path
+        // filename
+        // carpeta
+    }
     // let reqPath = path.join(__dirname, `../../src/archivos/${carpeta}/${body.filename}`);
 
     // var readStream = fs.createReadStream(body.path);
