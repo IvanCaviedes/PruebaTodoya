@@ -13,13 +13,17 @@ require("./database").connect()
 
 app.use(morgan('dev'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
 
 
 var AuthRoute = require("./router/authRouter")
+var FolderRoute = require("./router/folderRouter")
+var FilesRoute = require("./router/filesRouter")
 
 app.use('/api/auth', AuthRoute)
+app.use('/api/folder', FolderRoute)
+app.use('/api/files', FilesRoute)
 
 app.listen(PORT, (err) => {
     if (err) {

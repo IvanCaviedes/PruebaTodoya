@@ -5,30 +5,36 @@ const bcrypt = require('bcrypt');
 
 async function Login(req, res) {
     const { email, password } = req.body
-    const userRes = await UserModel.find({ email })
-    if (userRes.length) {
-        bcrypt.compare(password, userRes[0].password)
-            .then(match => {
-                if (match) {
+    try {
+        const userRes = await UserModel.find({ email })
+        if (userRes.length) {
+            bcrypt.compare(password, userRes[0].password)
+                .then(match => {
+                    if (match) {
 
-                    payload = {
-                        id: userRes[0]._id
-                    }
-
-                    jwt.sign(payload, JWT_SECRET_TOKEN, {}, (err, token) => {
-                        if (err) {
-                            res.status(500).send({ err });
-                        } else {
-                            res.status(200).send({ message: 'ACCESO', token });
+                        payload = {
+                            id: userRes[0]._id
                         }
-                    })
 
-                }else{
-                    res.status(404).send({ message: 'contraseña incorrecta' });
-                }
-            })
-    } else {
-        return res.status(404).send({ error: "Este usuario no existe" })
+                        jwt.sign(payload, JWT_SECRET_TOKEN, {}, (err, token) => {
+                            if (err) {
+                                res.status(500).send({ err });
+                            } else {
+                                res.status(200).send({ message: 'ACCESO', token });
+                            }
+                        })
+
+                    } else {
+                        res.status(404).send({ message: 'contraseña incorrecta' });
+                    }
+                })
+        } else {
+            return res.status(404).send({ error: "Este usuario no existe" })
+        }
+    } catch (error) {
+        res.status(500).send({
+            error
+        })
     }
 
 }
