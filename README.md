@@ -11,46 +11,33 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+_Para poder correr la aplicacion debes tener lo siguiente_
 
 ```
-Da un ejemplo
+Nodes js
+Npm 
+MongoBD compass o una linea de coneccion con mongo web
 ```
 
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+_El proyecto esta dividido en 2 partes una es frontend y la otra es el backend _
 
-_Dí cómo será ese paso_
-
-```
-Da un ejemplo
-```
-
-_Y repite_
+_para correr el backend_
+_Para poder correrlo necesitas añadir la coneccion a la base de datos en el .env_
 
 ```
-hasta finalizar
+cd backend
+npm install
+npm start
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
-
-## Ejecutando las pruebas ⚙️
-
-_Explica como ejecutar las pruebas automatizadas para este sistema_
-
-### Analice las pruebas end-to-end 🔩
-
-_Explica que verifican estas pruebas y por qué_
+_Para ejecutar el frontend_
 
 ```
-Da un ejemplo
+cd frontend 
+npm install
+npm start
 ```
 
-### Y las pruebas de estilo de codificación ⌨️
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
+_Muchas Gracias
