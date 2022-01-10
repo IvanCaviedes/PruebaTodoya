@@ -31,5 +31,7 @@ cd frontend
 npm install
 npm start
 ```
+_Link de prueba del aplicativo_
+https://pruebatodoya.herokuapp.com/login
 
 _Muchas Gracias
