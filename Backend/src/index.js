@@ -22,7 +22,6 @@ var dir = path.join(__dirname, 'archivos');
 app.use(express.static(dir));
 
 
-
 var AuthRoute = require("./router/authRouter")
 var FolderRoute = require("./router/folderRouter")
 var FilesRoute = require("./router/filesRouter")
@@ -31,6 +30,11 @@ app.use('/api/auth', AuthRoute)
 app.use('/api/folder', FolderRoute)
 app.use('/api/files', FilesRoute)
 
+app.use(express.static(path.join(__dirname, './build')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './build/index.html'));
+    
+});
 app.listen(PORT, (err) => {
     if (err) {
         console.log(`Algo salio mal, ${err}`)
