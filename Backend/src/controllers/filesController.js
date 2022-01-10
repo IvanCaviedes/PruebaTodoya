@@ -2,6 +2,19 @@ var fs = require('fs');
 const path = require("path")
 const FileModel = require("../models/fileModel")
 const FolderModel = require("../models/folderModel")
+const { PORT } = require("../config")
+async function index(req, res) {
+    try {
+        const { id } = req.params
+        const resCarpeta = await FileModel.find({ carpeta: id })
+        console.log(req.params)
+        res.status(200).send(resCarpeta)
+    } catch (error) {
+        res.status(500).send({
+            error
+        })
+    }
+}
 
 async function Upload(req, res) {
     const { carpeta } = req.body
@@ -12,35 +25,43 @@ async function Upload(req, res) {
             if (!resCarpeta.length) {
                 let rutaCarpeta = path.join(__dirname, `../../src/archivos`)
                 const carpetaRes = await new FolderModel({ nombreCarpeta: "archivosCarpetaPrincipal", rutaCarpeta }).save()
+
+                let pathGuardado = `http://localhost:${PORT}/archivos/${body.filename}`
                 guardarArchivo({
                     originalname: body.originalname,
                     type: body.mimetype,
-                    path: body.path,
+                    path: pathGuardado,
                     filename: body.filename,
                     carpeta: carpetaRes._id,
                     res
                 })
             }
             else {
+                let pathGuardado = `http://localhost:${PORT}/archivos/${body.filename}`
+
                 guardarArchivo({
                     originalname: body.originalname,
                     type: body.mimetype,
-                    path: body.path,
+                    path: pathGuardado,
                     filename: body.filename,
                     carpeta: resCarpeta[0]._id,
                     res
                 })
             }
         } else {
-            const resCarpeta = await FolderModel.find({ nombreCarpeta: carpeta })
+
+            let carpetavalidada = carpeta.split(" ").join("_")
+            const resCarpeta = await FolderModel.find({ nombreCarpeta: carpetavalidada })
             if (!resCarpeta.length) {
                 res.status(400).send({ message: "no existe la carpeta" })
             } else {
-                const reqPath = moverArchivo({ carpeta, body })
+                const reqPath = moverArchivo({ carpeta: carpetavalidada, body })
+
+                let pathGuardado = `http://localhost:${PORT}/${carpetavalidada}/${body.filename}`
                 guardarArchivo({
                     originalname: body.originalname,
                     type: body.mimetype,
-                    path: reqPath,
+                    path: pathGuardado,
                     filename: body.filename,
                     carpeta: resCarpeta[0]._id,
                     res
@@ -56,6 +77,8 @@ async function Upload(req, res) {
 
 function moverArchivo({ carpeta, body }) {
     let reqPath = path.join(__dirname, `../../src/archivos/${carpeta}/${body.filename}`);
+
+
     var readStream = fs.createReadStream(body.path);
     var writeStream = fs.createWriteStream(reqPath);
     readStream.on('close', async function () {
@@ -91,7 +114,7 @@ async function Delete(req, res) {
             if (err) console.log(err)
             console.log(`se elimino ${fileres.path}`)
         });
-        await fileres.remove().then((filedeleted)=>{
+        await fileres.remove().then((filedeleted) => {
             res.send({ message: `Se elimino el archivo ${filedeleted.path}` })
         })
     }
@@ -101,5 +124,6 @@ async function Delete(req, res) {
 }
 module.exports = {
     Upload,
-    Delete
+    Delete,
+    index
 }

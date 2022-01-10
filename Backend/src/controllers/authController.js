@@ -29,7 +29,7 @@ async function Login(req, res) {
                     }
                 })
         } else {
-            return res.status(404).send({ error: "Este usuario no existe" })
+            return res.status(404).send({ message: "Este usuario no existe" })
         }
     } catch (error) {
         res.status(500).send({
@@ -44,7 +44,7 @@ async function Register(req, res) {
     try {
         const User = await UserModel.find({ email })
         if (User.length) {
-            return res.status(404).send({ error: "Este correo ya esta en uso" })
+            return res.status(404).send({ message: "Este correo ya esta en uso" })
         } else {
             const newUser = await new UserModel({ email, password }).save()
             const payload = {
