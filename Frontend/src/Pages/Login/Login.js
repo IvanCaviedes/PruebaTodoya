@@ -47,9 +47,9 @@ function Login() {
                     {error.data.message}
                 </div>
             }
-            <div className='login col-auto text-center w-50 h-50 row'>
+            <div className='login col-auto text-center col-md-6 col-12 row'>
                 <div className="col-md-12 col-sm-12 col-12 col-lg-6" >
-                    <img className='row img-fluid pt-4' src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png" alt="" />
+                    <img className='row img-fluid pt-4' src="https://multimedia-todoya-dev.s3.amazonaws.com/1/storage/site/site_logo.png" alt="" />
                 </div>
                 <div className="col-md-12 col-12 col-lg-6">
                     <form className='pt-5' onSubmit={handleSubmit(onSubmit, onError)}>
@@ -60,8 +60,9 @@ function Login() {
                         <div class="my-3">
                             <input {...register("password", { required: true })} type="password" className="form-control" id="floatingPassword" placeholder="Contraseña" />
                         </div>
-                        <button className="w-100 btn btn-lg btn-primary" type="submit">{isregister ? 'Registrar' : 'Iniciar sesion'}</button>
-                        <button className="w-100 btn btn-lg btn-info mt-2" onClick={()=>setisregister(!isregister)}>{isregister ? 'Iniciar sesion' : 'Registrar'}</button>
+                        <button className="w-100 btn btn-lg btn-primary mb-2" type="submit">{isregister ? 'Registrar' : 'Iniciar sesion'}</button>
+                        <p>Si no tienes cuenta registrate</p>
+                        <button className="w-100 btn btn-lg btn-info" onClick={()=>setisregister(!isregister)}>{isregister ? 'Iniciar sesion' : 'Registrar'}</button>
                     </form>
                 </div>
             </div>

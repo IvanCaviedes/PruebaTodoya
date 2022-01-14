@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/assets/css/index.css"],"names":[],"mappings":"AAAA,QACI,iBAAkB,CAClB,QAAS,CACT,OAAQ,CACR,MACJ","file":"main.deae8a39.chunk.css","sourcesContent":[".footer {\r\n    position: absolute;\r\n    bottom: 0;\r\n    right: 0;\r\n    left: 0;\r\n}"]}

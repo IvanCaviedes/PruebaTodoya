@@ -26,7 +26,8 @@ async function Upload(req, res) {
                 let rutaCarpeta = path.join(__dirname, `../../src/archivos`)
                 const carpetaRes = await new FolderModel({ nombreCarpeta: "archivosCarpetaPrincipal", rutaCarpeta }).save()
 
-                let pathGuardado = `http://localhost:${PORT}/archivos/${body.filename}`
+                let pathGuardado = `https://pruebatodoya.herokuapp.com/archivos/${body.filename}`
+                
                 guardarArchivo({
                     originalname: body.originalname,
                     type: body.mimetype,
@@ -37,7 +38,7 @@ async function Upload(req, res) {
                 })
             }
             else {
-                let pathGuardado = `http://localhost:${PORT}/archivos/${body.filename}`
+                let pathGuardado = `https://pruebatodoya.herokuapp.com/archivos/${body.filename}`
 
                 guardarArchivo({
                     originalname: body.originalname,
@@ -57,7 +58,7 @@ async function Upload(req, res) {
             } else {
                 const reqPath = moverArchivo({ carpeta: carpetavalidada, body })
 
-                let pathGuardado = `http://localhost:${PORT}/${carpetavalidada}/${body.filename}`
+                let pathGuardado = `https://pruebatodoya.herokuapp.com/${carpetavalidada}/${body.filename}`
                 guardarArchivo({
                     originalname: body.originalname,
                     type: body.mimetype,

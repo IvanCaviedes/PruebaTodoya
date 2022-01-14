@@ -5,6 +5,8 @@ import ListaCarpetas from './Pages/listCarpetas/ListaCarpetas'
 import ListaArchivos from './Pages/listArchivos/ListaArchivos'
 import RouteSegure from './utils/RouteSegure'
 
+import './assets/css/index.css'
+
 function App() {
   return (
     <BrowserRouter>
